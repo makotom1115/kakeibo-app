@@ -90,6 +90,14 @@
 <!-- ボタン（外出し・下中央） -->
 <div class="button-area-bottom">
     <form action="{{ url_for('save') }}" method="POST">
+        
+        <input type="hidden" name="user_id" value="{{ data.user_id }}">
+        <input type="hidden" name="category_id" value="{{ data.category_id }}">
+        <input type="hidden" name="income" value="{{ data.income }}">
+        <input type="hidden" name="expense" value="{{ data.expense }}">
+        <input type="hidden" name="memo" value="{{ data.memo }}">
+        
+        <input type="hidden" name="posting_date" value="{{ data.posting_date }}">
         <button type="submit">登録する</button>
     </form>
 
