@@ -116,6 +116,9 @@ app.config["SQLALCHEMY_DATABASE_URI"] = database_url if database_url else sqlite
 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
+print("DATABASE_URL =", os.environ.get("DATABASE_URL"))
+print("SQLALCHEMY_DATABASE_URI =", app.config["SQLALCHEMY_DATABASE_URI"])
+
 # =============================
 # アプリ実行
 # =============================
