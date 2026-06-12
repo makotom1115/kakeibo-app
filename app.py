@@ -666,6 +666,8 @@ def search_advanced():
 # 簡易検索画面・詳細検索画面　→　ファイル出力画面
 @app.route('/export', methods=['GET','POST'])
 def export():
+    if not session.get('login'):
+        return redirect(url_for('app_login'))
 
     # 会計日検索の情報取得
     start_date = request.form.get('start_date')
@@ -696,6 +698,8 @@ def export():
 # CSV出力
 @app.route('/csv/download', methods=['POST'])
 def csv_download():
+    if not session.get('login'):
+        return redirect(url_for('app_login'))
 
     # HouseholdBudget と Account を 内部結合してqueryに保存
     query = HouseholdBudget.query.join(Categories)
@@ -776,6 +780,8 @@ def csv_download():
 # pdf出力
 @app.route('/pdf/download', methods=['POST'])
 def pdf_download():
+    if not session.get('login'):
+        return redirect(url_for('app_login'))
 
     query = (
     HouseholdBudget.query
