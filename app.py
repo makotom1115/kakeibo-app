@@ -129,6 +129,8 @@ if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
 
+register_heif_opener()
+
 # ===============================================
 # ルーティング
 # ===============================================
@@ -305,8 +307,6 @@ def input_page():
 
     manual_form = ManualForm()
     ocr_form = OCRForm()
-
-    register_heif_opener()
 
     category_id = None
     income = 0
