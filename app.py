@@ -242,8 +242,6 @@ def seed_categories(account_id):
 
 # ==================================================
 
-UPLOAD_FOLDER = os.path.join(app.root_path, "uploads")
-
 @app.route("/uploads/<path:filename>")
 def uploaded_file(filename):
     # セキュリティ対策（パストラバーサル防止）
@@ -276,7 +274,7 @@ def convert_to_jpeg(src_path):
 @app.route('/ocr_image')
 def ocr_image():
 
-    image_path = session.get("ocr_image_path")
+    image_path = session.get("ocr_image_filename")
 
     if not image_path or not os.path.exists(image_path):
         return "Image not found", 404
