@@ -301,7 +301,7 @@ def logout():
 def input_page():
 
     if not session.get('login'):
-        return redirect(url_for('app_Slogin'))
+        return redirect(url_for('app_login'))
 
     mode = request.form.get("mode", "manual")
 
