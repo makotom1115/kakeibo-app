@@ -942,7 +942,10 @@ def master_category_edit(id):
     if not session.get('login'):
         return redirect(url_for('app_login'))   
     
-    category = Categories.query.get_or_404(id)
+    category = Categories.query.filter_by(
+        id=id,
+        account_id=session["account_id"]
+    ).first_or_404()
 
     if request.method == 'POST':
 
@@ -993,7 +996,10 @@ def master_user_edit(id):
     if not session.get('login'):
         return redirect(url_for('app_login')) 
     
-    User = Users.query.get_or_404(id)
+    User = Users.query.filter_by(
+        id=id,
+        account_id=session["account_id"]
+    ).first_or_404()
 
     if request.method == 'POST': 
 
