@@ -301,7 +301,7 @@ def logout():
 def input_page():
 
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_Slogin'))
 
     mode = request.form.get("mode", "manual")
 
@@ -544,7 +544,7 @@ def save():
 @app.route('/input/all/content')
 def input_all_content():
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
     
     householdbudgets = HouseholdBudget.query.filter_by(
         account_id=session["account_id"]
@@ -558,7 +558,7 @@ def input_all_content():
 def input_edit(id):
 
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
     
     householdbudget = HouseholdBudget.query.filter_by(
         id=id,
@@ -613,7 +613,7 @@ def input_edit(id):
 def input_delete(id):
 
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
 
     householdbudget = HouseholdBudget.query.filter_by(
         id=id,
@@ -629,14 +629,14 @@ def input_delete(id):
 @app.route('/search/top', methods=['GET', 'POST'])
 def search_top():
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
     return render_template('content/search_top.html')
 
 #　TOP画面　→　マスタTOP画面
 @app.route('/master', methods=['GET', 'POST'])
 def master_top():
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     return render_template('admin/master_top.html')
 
 # =================================================
@@ -645,7 +645,7 @@ def master_top():
 @app.route('/search/simple', methods=['GET', 'POST'])
 def search_simple():
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
     
     start_date = date.today().replace(day=1).isoformat()
     end_date = date.today().isoformat()
@@ -656,7 +656,7 @@ def search_simple():
 @app.route('/search/advanced', methods=['GET', 'POST'])
 def search_advanced():
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     
     start_date = date.today().replace(day=1).isoformat()
     end_date = date.today().isoformat()
@@ -902,7 +902,7 @@ def pdf_download():
 @app.route('/master/category', methods=['GET', 'POST'])
 def master_category():
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     
     if request.method == 'POST':
 
@@ -924,7 +924,7 @@ def master_category():
 @app.route('/master/category/preview')
 def master_category_preview():
     if not session.get('login'):
-        return redirect(url_for('login'))   
+        return redirect(url_for('app_login'))   
 
     categories = Categories.query.filter_by(
         account_id=session["account_id"]
@@ -936,7 +936,7 @@ def master_category_preview():
 @app.route('/master/category/edit/<int:id>', methods=['GET', 'POST'])
 def master_category_edit(id):
     if not session.get('login'):
-        return redirect(url_for('login'))   
+        return redirect(url_for('app_login'))   
     
     category = Categories.query.get_or_404(id)
 
@@ -955,7 +955,7 @@ def master_category_edit(id):
 @app.route('/master/user', methods=['GET', 'POST'])
 def master_user():
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     
     if request.method == 'POST':
 
@@ -975,7 +975,7 @@ def master_user():
 @app.route('/master/user/preview/', methods=['GET', 'POST'])
 def master_user_preview():
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     
     User = Users.query.filter_by(
         account_id=session["account_id"]
@@ -987,7 +987,7 @@ def master_user_preview():
 @app.route('/master/user/edit/<id>', methods=['GET', 'POST'])
 def master_user_edit(id):
     if not session.get('login'):
-        return redirect(url_for('login')) 
+        return redirect(url_for('app_login')) 
     
     User = Users.query.get_or_404(id)
 
