@@ -287,14 +287,14 @@ def ocr_image():
 @app.route('/top', methods=['GET', 'POST'])
 def top():
     if not session.get('login'):
-        return redirect(url_for('login'))
+        return redirect(url_for('app_login'))
     return render_template('content/top.html')
 
 # TOP画面　→　ログアウト処理
 @app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session.clear()
-    return redirect(url_for('login'))
+    return redirect(url_for('app_login'))
 
 # TOP画面　→　Input画面
 @app.route('/input/page', methods=['GET', 'POST'])
