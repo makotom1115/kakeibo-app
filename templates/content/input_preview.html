@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}入力内容確認{% endblock %}
+
+{% block h2 %}
+<h2>入力内容の確認</h2>
+{% endblock %}
+
+{% block content %}
+
+<div class="preview-flex">
+
+    {% if image_filename %}
+    <div class="receipt-image">
+        <img
+            id="receiptPreview"
+            src="{{ url_for('uploaded_file', filename=image_filename) }}"
+            alt="レシート画像"
+        >
+    </div>
+
+    <!-- モーダル -->
+    <div id="imageModal" class="image-modal">
+        <span class="close-btn">&times;</span>
+        <img id="modalImage" class="modal-content">
+    </div>
+    {% endif %}
+
+    <div class="form-area">
+
+        <form action="{{ url_for('save') }}" method="POST">
+
+            <table class="confirm-table">
+
+                <tr>
+                    <th>ユーザー</th>
+                    <td>
+                        <select name="user_id">
+                            {% for user in users %}
+                                <option value="{{ user.id }}"
+                                    {% if user.id == data.user_id %}selected{% endif %}>
+                                    {{ user.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>費目</th>
+                    <td>
+                        <select name="category_id">
+                            {% for category in categories %}
+                                <option value="{{ category.id }}"
+                                    {% if category.id == data.category_id %}selected{% endif %}>
+                                    {{ category.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+
+                <tr class="highlight">
+                    <th>収入</th>
+                    <td><input type="number" name="income" value="{{ data.income }}"></td>
+                </tr>
+
+                <tr class="highlight">
+                    <th>支出</th>
+                    <td><input type="number" name="expense" value="{{ data.expense }}"></td>
+                </tr>
+
+                <tr>
+                    <th>メモ</th>
+                    <td><textarea name="memo">{{ data.memo }}</textarea></td>
+                </tr>
+
+                <tr>
+                    <th>会計日</th>
+                    <td><input type="date" name="posting_date" value="{{ data.posting_date }}"></td>
+                </tr>
+
+            </table>
+
+        </form>
+
+    </div>
+</div>
+
+<!-- ボタン（外出し・下中央） -->
+<div class="button-area-bottom">
+    <form action="{{ url_for('save') }}" method="POST">
+        <button type="submit">登録する</button>
+    </form>
+
+    <form action="{{ url_for('input_page') }}" method="GET">
+        <button type="submit">戻る</button>
+    </form>
+</div>
+
+<script>
+const preview = document.getElementById("receiptPreview");
+
+if (preview) {
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.querySelector(".close-btn");
+
+    preview.addEventListener("click", () => {
+        modal.style.display = "block";
+        modalImg.src = preview.src;
+    });
+
+    closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+    });
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) {
+            modal.style.display = "none";
+        }
+    });
+}
+</script>
+
+{% endblock %}

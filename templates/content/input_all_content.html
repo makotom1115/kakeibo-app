@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+家計簿表示
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        家計簿表示画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<div class="kakeibo-preview-container">
+    <table>
+        <tr>
+            <th>ユーザー</th>
+            <th>会計日</th>
+            <th>入力日</th>
+            <th>費目</th>
+            <th>収入額</th>
+            <th>支出額</th>
+            <th>メモ</th>
+            <th>編集</th>
+        </tr>
+    {% for h in householdbudgets %}
+        <tr>
+
+            <td>{{ h.user.name }}</td>
+            <td>{{ h.posting_date }}</td>
+            <td>{{ h.input_date }}</td>
+            <td>{{ h.categories.name }}</td>
+            <td>{{ "{:,}".format(h.income or 0) }}</td>
+            <td>{{ "{:,}".format(h.expense or 0) }}</td>
+            <td>{{ h.memo }}</td>
+            <td>
+                <a href="{{ url_for('input_edit', id=h.id) }}">
+                    <button type="button">
+                        編集
+                    </button>
+                </a>
+            </td>
+
+        </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('input_page')}}">
+        入力画面へ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}

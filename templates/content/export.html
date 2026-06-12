@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ファイル出力
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        ファイル出力
+    </h2>
+{% endblock %}
+
+{% block content %}
+<h3>検索条件</h3>
+
+<p>開始日：{{ start_date }}</p>
+<p>終了日：{{ end_date }}</p>
+
+{% if transaction_type %}
+<p>収支区分：{{ transaction_type }}</p>
+{% endif %}
+
+{% if account_id %}
+<p>費目ID：{{ account_id }}</p>
+{% endif %}
+
+{% if memo %}
+<p>メモ：{{ memo }}</p>
+{% endif %}
+
+<div class="download-area">
+    <form action="{{ url_for('csv_download') }}" 
+          method="POST">
+
+        <input type="hidden" 
+               name="start_date" 
+               value="{{ start_date }}">
+
+        <input type="hidden" 
+               name="end_date" 
+               value="{{ end_date }}">
+
+        <input type="hidden" 
+               name="transaction_type" 
+               value="{{ transaction_type or '' }}">
+
+        <input type="hidden" 
+               name="account_id" 
+               value="{{ account_id or '' }}">
+
+        <input type="hidden" 
+               name="memo" 
+               value="{{ memo or '' }}">
+
+        <button type="submit">
+            CSVダウンロード
+        </button>
+
+    </form>
+
+    <form action="{{ url_for('pdf_download') }}" 
+          method="POST">
+
+        <input type="hidden" 
+               name="start_date" 
+               value="{{ start_date }}">
+
+        <input type="hidden" 
+               name="end_date" 
+               value="{{ end_date }}">
+
+        <input type="hidden" 
+               name="transaction_type" 
+               value="{{ transaction_type or '' }}">
+
+        <input type="hidden" 
+               name="account_id" 
+               value="{{ account_id or '' }}">
+
+        <input type="hidden" 
+               name="memo" 
+               value="{{ memo or '' }}">
+
+        <button type="submit">
+            PDF出力
+        </button>
+    </form>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('search_top')}}">
+        検索TOPへ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}マスタTOP{% endblock %}
+
+{% block h2 %}
+    <h2>
+        マスタTOP画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<div class="master-top-submit">
+    <form action="{{ url_for('master_user')}}">
+        <button type="submit">
+            ユーザー登録画面
+        </button>
+    </form>
+    <form action="{{ url_for('master_category')}}">
+        <button type="submit">
+            費目登録画面
+        </button>
+    </form>
+</div>
+{% endblock %}

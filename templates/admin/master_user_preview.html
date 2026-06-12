@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}ユーザー編集{% endblock %}
+
+{% block h2 %}
+    <h2>
+        ユーザー表示画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<div class="preview-container">
+    <table>
+        <tr>
+            <th>
+                ユーザー名
+            </th>
+
+            <th>
+                編集
+            </th>
+        </tr>
+    {% for u in User %}
+    <tr>
+        <td>
+            {{ u.name }}
+        </td>
+
+        <td>
+            <a href="{{ url_for('master_user_edit', id=u.id) }}">
+                <button type="button">
+                    編集
+                </button>
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+</div>
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('master_top')}}">
+        マスタTOP画面へ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}

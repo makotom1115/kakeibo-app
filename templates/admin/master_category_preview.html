@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% block title %}費目表示{% endblock %}
+
+{% block h2 %}
+    <h2>
+        費目表示画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<div class="preview-container">
+
+    <table>
+
+        <tr>
+            <th>
+                費目名
+            </th>
+
+            <th>
+                種類
+            </th>
+
+            <th>
+                編集
+            </th>
+        </tr>
+
+    {% for a in Categories %}
+    <tr>
+
+        <td>
+            {{ a.name }}
+        </td>
+
+        <td>
+            {{ a.transaction_type }}
+        </td>
+
+        <td>
+            <a href="{{ url_for('master_category_edit', id=a.id) }}">
+                <button type="button">
+                    編集
+                </button>
+            </a>
+        </td>
+
+    </tr>
+    {% endfor %}
+    </table>
+</div>
+
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('master_top')}}">
+        マスタTOP画面へ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}

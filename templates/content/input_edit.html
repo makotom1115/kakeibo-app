@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block title %}家計簿編集{% endblock %}
+
+{% block h2 %}
+    <h2>
+        家計簿編集画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+
+    <table class="input-table">
+
+        <tr>
+            <th>
+                ユーザー
+            </th>
+            <th>
+                会計日
+            </th>
+            <th>
+                入力日
+            </th>
+            <th>
+                費目
+            </th>
+            <th>
+                収入額
+            </th>
+            <th>
+                支出額
+            </th>
+            <th>
+                メモ
+            </th>
+        </tr>
+
+        <tr>
+            <td>
+                <select name="user_id">
+
+                        {% for user in users %}
+                            <option value="{{ user.id }}"
+                                {% if user.id == householdbudget.user_id %}
+                                    selected
+                                {% endif %}
+                            >
+                                {{ user.name }}
+                            </option>
+                        {% endfor %}
+
+                </select>
+            </td>
+
+            <td>
+                <input type="date" 
+                       name="posting_date"
+                       value="{{ householdbudget.posting_date }}">
+            </td>
+
+            <td>
+                {{ householdbudget.input_date }}
+            </td>
+
+            <td>
+                <select name="category_id" id="category_id">
+
+                    {% for category in categories %}
+                        <option value="{{ category.id }}"
+                            {% if category.id == householdbudget.category_id %}
+                                selected
+                            {% endif %}
+                        >
+                            {{ category.name }}
+                        </option>
+                    {% endfor %}
+
+                </select>
+            </td>
+
+            <td>
+                <input type="text" 
+                       name="income" 
+                       value="{{ householdbudget.income or 0 }}">
+            </td>
+
+            <td>
+                <input type="text" 
+                       name="expense" 
+                       value="{{ householdbudget.expense or 0 }}">
+            </td>
+
+            <td>
+                <textarea name="memo" 
+                          rows="4" 
+                          cols="30">{{ householdbudget.memo or '' }}</textarea>
+            </td>
+        </tr>
+    </table>
+    <div class="button-area">
+        <button type="submit">
+            更新
+        </button>
+
+        <button type="submit"
+                class="delete-btn"
+                formaction="{{ url_for('input_delete', id=householdbudget.id) }}"
+                formmethod="POST"
+                onclick="return confirm('このデータを削除しますか？');">
+            削除
+        </button>
+    </div>
+<script>
+function updateCategoryType(categoryType) {
+
+    const income = document.getElementById("income");
+    const expense = document.getElementById("expense");
+
+    // 初期化
+    income.readOnly = false;
+    expense.readOnly = false;
+
+    // 収入
+    if (categoryType === "income") {
+        expense.readOnly = true;
+        expense.value = "";
+
+        // グレー化
+        expense.style.backgroundColor = "#eee";
+    }
+
+    // 支出
+    if (categoryType === "expense") {
+        income.readOnly = true;
+        income.value = "";
+
+        // グレー化
+        income.style.backgroundColor = "#eee";
+    }
+}
+</script>
+
+</form>
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('input_page')}}">TOP画面へ</a><br>
+    {{super()}}
+{% endblock %}

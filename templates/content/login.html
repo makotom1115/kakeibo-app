@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block title %}
+ログイン
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        ログイン画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<form method="POST">
+
+    <label>メールアドレス</label><br>
+    <input type="email" name="email"><br>
+    <br>
+    <label>パスワード</label><br>
+    <input type="password" name="password"><br>
+    <br>
+    <button type="submit">
+        ログイン
+    </button>
+
+</form>
+
+<a href="{{ url_for('register') }}">
+    新規登録する方はこちら
+</a>
+{% endblock %}
+
+{% block footer %}{% endblock %}

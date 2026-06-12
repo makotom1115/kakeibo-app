@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+{% block title %}
+簡易検索
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        簡易検索画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('search_advanced')}}">
+    詳細検索に変更
+</a>
+<br>
+<form action="{{ url_for('export')}}" 
+      method="POST">
+
+    <input type="hidden"
+           name="search_mode"
+           value="simple">
+
+    <table class="search-table">
+        <tr>
+            <th>開始日</th>
+            <td>
+                <input type="date" 
+                       name="start_date" 
+                       value="{{ start_date }}">
+            </td>
+
+            <th>終了日</th>
+            <td>
+                <input type="date" 
+                       name="end_date" 
+                       value="{{ end_date }}">
+            </td>
+        </tr>
+
+    </table>
+
+    <div class="button-area">
+        <button type="submit">
+            確認画面へ
+        </button>
+    </div>
+    
+</form>
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('search_top')}}">
+        検索TOPへ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}

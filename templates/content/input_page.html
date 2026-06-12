@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block title %}家計簿入力{% endblock %}
+
+{% block h2 %}
+<h2>家計簿入力画面</h2>
+{% endblock %}
+
+{% block content %}
+
+<!-- ===================== 残高 ===================== -->
+<div class="balance-box">
+    現在残高：{{ "{:,}".format(balance) }} 円
+</div>
+
+<!-- ===================== モード切替 ===================== -->
+<div class="input-area">
+    <label>入力モード：</label>
+    <select id="mode">
+        <option value="manual">手入力</option>
+        <option value="ocr">OCR読み取り</option>
+    </select>
+</div>
+
+<hr>
+
+<!-- ===================== OCRフォーム ===================== -->
+<div id="ocr_area" class="input-area">
+
+    <h3>OCR読み取り</h3>
+
+    <form method="POST" enctype="multipart/form-data">
+        {{ ocr_form.csrf_token }}
+    <input type="hidden" name="mode" value="ocr">
+
+    <table class="input-table">
+        <tr>
+            <th>ユーザー</th>
+            <th>レシート</th>
+        </tr>
+
+        <tr>
+            <td>
+                <select name="user_id" required>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">
+                            {{ user.name }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </td>
+
+            <td>
+                {{ ocr_form.receipt_image() }}
+            </td>
+        </tr>
+    </table>
+        <button type="submit">OCR実行</button>
+    </form>
+</div>
+
+<hr>
+
+<!-- ===================== 手入力フォーム ===================== -->
+<div id="manual_area" class="input-area">
+
+    <h3>手入力</h3>
+
+    <form method="POST">
+        {{ manual_form.csrf_token }}
+        <input type="hidden" name="mode" value="manual">
+
+        <table class="input-table">
+            <tr>
+                <th>ユーザー</th>
+                <th>会計日</th>
+                <th>入力日</th>
+                <th>費目</th>
+                <th>収入</th>
+                <th>支出</th>
+                <th>メモ</th>
+            </tr>
+
+            <tr>
+                <!-- ユーザー -->
+                <td>
+                    <select name="user_id">
+                        {% for user in users %}
+                            <option value="{{ user.id }}">
+                                {{ user.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <!-- 会計日 -->
+                <td>
+                    {{ manual_form.posting_date() }}
+                </td>
+
+                <!-- 入力日（表示だけ） -->
+                <td>
+                    {{ today }}
+                </td>
+
+                <!-- 費目 -->
+                <td>
+                    <select name="category_id" id="category_id">
+                        {% for category in categories %}
+                            <option value="{{ category.id }}">
+                                {{ category.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </td>
+
+                <!-- 収入 -->
+                <td>
+                    {{ manual_form.income() }}
+                </td>
+
+                <!-- 支出 -->
+                <td>
+                    {{ manual_form.expense() }}
+                </td>
+
+                <!-- メモ -->
+                <td>
+                    {{ manual_form.memo() }}
+                </td>
+            </tr>
+        </table>
+
+        <div class="button-area">
+            <button type="submit">登録</button>
+        </div>
+    </form>
+</div>
+
+<hr>
+
+<!-- ===================== 直近データ ===================== -->
+<h3>直近の入力（最新5件）</h3>
+
+<table class="input-table">
+    <tr>
+        <th>ユーザー</th>
+        <th>会計日</th>
+        <th>入力日</th>
+        <th>費目</th>
+        <th>収入額</th>
+        <th>支出額</th>
+        <th>メモ</th>
+    </tr>
+
+    {% for b in recent_budgets %}
+    <tr>
+        <td>{{ b.user.name }}</td>
+        <td>{{ b.posting_date }}</td>
+        <td>{{ b.input_date }}</td>
+        <td>{{ b.categories.name }}</td>
+        <td>{{ "{:,}".format(b.income) }}</td>
+        <td>{{ "{:,}".format(b.expense) }}</td>
+        <td>{{ b.memo }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<a href="{{ url_for('input_all_content') }}">
+    入力内容の確認・編集
+</a>
+
+<!-- ===================== JS切替 ===================== -->
+<script>
+const mode = document.getElementById("mode");
+const ocrArea = document.getElementById("ocr_area");
+const manualArea = document.getElementById("manual_area");
+
+function toggle() {
+    if (mode.value === "ocr") {
+        ocrArea.style.display = "block";
+        manualArea.style.display = "none";
+    } else {
+        ocrArea.style.display = "none";
+        manualArea.style.display = "block";
+    }
+}
+
+mode.addEventListener("change", toggle);
+toggle();
+</script>
+
+{% endblock %}

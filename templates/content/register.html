@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+アカウント登録
+{% endblock %}
+
+{% block h2 %}
+<h2>アカウント登録</h2>
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+
+    {{ form.hidden_tag() }}
+
+    <div>
+        {{ form.email.label }}
+        <br>
+        {{ form.email(size=40) }}
+
+        {% for error in form.email.errors %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+        {{ form.password.label }}
+        <br>
+        {{ form.password(size=40) }}
+
+        {% for error in form.password.errors %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    <div>
+        {{ form.password_confirm.label }}
+        <br>
+        {{ form.password_confirm(size=40) }}
+
+        {% for error in form.password_confirm.errors %}
+            <div class="error">
+                {{ error }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <br>
+
+    {{ form.submit() }}
+
+</form>
+
+{% endblock %}
+
+{% block footer %}
+<a href="{{ url_for('app_login') }}">
+    ログイン画面へ戻る
+</a>
+{% endblock %}

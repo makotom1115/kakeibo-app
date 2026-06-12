@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+検索TOP
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        検索TOP画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<div class="search-top-submit">
+    <form action="{{ url_for('search_simple')}}">
+        <button type="submit">
+            簡易検索
+        </button>
+    </form>
+    <form action="{{ url_for('search_advanced')}}">
+        <button type="submit">
+            詳細検索
+        </button>
+    </form>
+</div>
+{% endblock %}

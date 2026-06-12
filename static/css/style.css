@@ -1,0 +1,354 @@
+@charset "utf-8";
+
+/* ==================================
+   共通レイアウト
+================================== */
+
+.container,
+.edit-container {
+    text-align: center;
+}
+
+.content-container,
+.footer-container {
+    margin: 30px 0;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+/* ==================================
+   ボタン
+================================== */
+
+button,
+input[type="submit"] {
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 20px 30px;
+}
+
+.button-area,
+.top-submit,
+.search-top-submit,
+.download-area,
+.master-top-submit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+/* ==================================
+   入力画面
+================================== */
+
+.input-area {
+    overflow-x: auto;
+}
+
+.input-table {
+    width: 70%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.input-table th,
+.input-table td {
+    border: 1px solid #000;
+    padding: 8px 15px;
+    text-align: center;
+}
+
+.input-table input,
+.input-table select {
+    width: 100px;
+    border: none;
+    text-align: center;
+}
+
+.input-table input:focus,
+.input-table select:focus,
+.input-table textarea:focus {
+    outline: none;
+}
+
+/* 入力可能欄 */
+
+.input-table input:not([readonly]),
+.input-table textarea:not([readonly]),
+.input-table select {
+    background-color: #dcdcdc;
+}
+
+input[type="file"] {
+    width: 180px;
+}
+
+#mode {
+    margin-bottom: 10px;
+}
+
+/* ==================================
+   残高表示
+================================== */
+
+.balance-box {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 10px;
+}
+
+/* ==============================
+   入力確認画面
+============================== */
+
+.confirm-table {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+}
+
+.input-table th,
+.confirm-table th,
+.preview-container th,
+.kakeibo-preview-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.confirm-table th {
+    text-align: left;
+    padding: 12px;
+    background: #f5f5f5;
+    width: 150px;
+}
+
+.confirm-table td {
+    padding: 12px;
+}
+
+.confirm-table input,
+.confirm-table select,
+.confirm-table textarea {
+    width: 100%;
+    padding: 6px;
+    box-sizing: border-box;
+}
+
+/* 重要項目強調 */
+.highlight th {
+    color: #d9534f;
+    font-weight: bold;
+}
+
+.search-table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.search-table th,
+.search-table td {
+    border: 1px solid #ccc;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+.search-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+/* ==================================
+   プレビュー画面
+================================== */
+
+.preview-container {
+    width: 100%;
+}
+
+.preview-container table {
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.preview-container th,
+.preview-container td {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
+}
+
+.preview-flex {
+    display: flex;
+    gap: 40px;
+    align-items: stretch;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* 左：画像 */
+.receipt-image {
+    flex: 0 0 420px;
+}
+
+
+.form-area {
+    flex: 1;
+    min-width: 0;
+}
+
+/* 右：フォーム */
+.form-area {
+    flex: 1;
+    min-width: 0;
+
+    min-height: 100%;
+}
+
+.receipt-image img {
+    width: 100%;
+    height: auto;
+    cursor: zoom-in;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+/* モーダル背景 */
+.image-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: rgba(0,0,0,0.8);
+    overflow: auto;
+}
+
+
+/* 拡大画像 */
+.modal-content {
+    display: block;
+    margin: 20px auto;
+    width: 800px;
+    max-width: 90%;
+    height: auto;
+}
+
+.button-area-bottom {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.button-area-bottom button {
+    padding: 10px 24px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* ×ボタン */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    color: white;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+/* ==================================
+   家計簿一覧画面
+================================== */
+
+.kakeibo-preview-container {
+    margin-top: 30px;
+    overflow-x: auto;
+}
+
+.kakeibo-preview-container table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.kakeibo-preview-container th,
+.kakeibo-preview-container td {
+    border: 1px solid #ccc;
+    padding: 12px 16px;
+    text-align: center;
+}
+
+.kakeibo-preview-container th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+}
+
+.kakeibo-preview-container tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.kakeibo-preview-container tr:hover {
+    background-color: #f0f8ff;
+}
+
+/* ==================================
+   フラッシュメッセージ
+================================== */
+
+.flash-message {
+    width: 70%;
+    margin: 10px auto;
+    padding: 10px;
+    background-color: #ffe5e5;
+    border: 1px solid #ff6666;
+    border-radius: 5px;
+    color: #cc0000;
+    font-weight: bold;
+}
+
+/* ==================================
+   レスポンシブ
+================================== */
+
+
+@media screen and (max-width: 768px) {
+
+    .input-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .input-area {
+        padding: 10px;
+    }
+
+    select, input, textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .balance-box {
+        font-size: 14px;
+    }
+
+    th, td {
+        font-size: 12px;
+        padding: 6px;
+    }
+
+    .preview-flex {
+        flex-direction: column;
+    }
+
+    .receipt-image {
+        max-width: 100%;
+    }
+}

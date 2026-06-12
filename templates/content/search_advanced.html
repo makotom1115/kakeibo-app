@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block title %}
+詳細検索
+{% endblock %}
+
+{% block h2 %}
+    <h2>
+        詳細検索画面
+    </h2>
+{% endblock %}
+
+{% block content %}
+<a href="{{ url_for('search_simple')}}">
+    簡易検索に変更
+</a>
+<br>
+<form action="{{ url_for('export') }}"
+      method="POST">
+
+    <input type="hidden"
+           name="search_mode"
+           value="advanced">
+
+    <table class="search-table">
+
+        <tr>
+            <th>開始日</th>
+            <td>
+                <input type="date"
+                       name="start_date"
+                       value="{{ start_date }}">
+            </td>
+        </tr>
+
+        <tr>
+            <th>終了日</th>
+            <td>
+                <input type="date"
+                       name="end_date"
+                       value="{{ end_date }}">
+            </td>
+        </tr>
+
+        <tr>
+            <th>収支区分</th>
+            <td>
+                <select name="transaction_type">
+                    <option value="">全て</option>
+                    <option value="income">収入</option>
+                    <option value="expense">支出</option>
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th>費目</th>
+            <td>
+                <select name="category_id">
+                    <option value="">全て</option>
+
+                    {% for category in categories %}
+                    <option value="{{ category.id }}">
+                        {{ category.name }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+
+        <tr>
+            <th>メモ</th>
+            <td>
+                <textarea name="memo"
+                          rows="4"
+                          cols="30">{{ memo or '' }}</textarea>
+            </td>
+        </tr>
+
+    </table>
+
+    <div class="button-area">
+        <button type="submit">
+            確認画面へ
+        </button>
+    </div>
+
+</form>
+{% endblock %}
+
+{% block footer %}
+    <a href="{{ url_for('search_top')}}">
+        検索TOPへ
+    </a>
+    <br>
+    {{super()}}
+{% endblock %}
