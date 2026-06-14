@@ -457,6 +457,8 @@ def input_page():
             )
 
         session["draft"] = {
+            "user_id": request.form.get("user_id"),
+            "category_id": request.form.get("category_id"),
             "income": manual_form.income.data or 0,
             "expense": manual_form.expense.data or 0,
             "memo": manual_form.memo.data or "",
