@@ -518,19 +518,17 @@ def save():
         if os.path.exists(full_path):
             os.remove(full_path)
 
-    data = session.get("draft")
-
-    if not data:
-        return redirect(url_for("input_page"))
+    posting_date_str = request.form.get("posting_date")
+    posting_date = datetime.strptime(posting_date_str, "%Y-%m-%d").date()
 
     new_data = HouseholdBudget(
         account_id=session["account_id"],
-        user_id=data.get("user_id"),
-        category_id=data.get("category_id"),
-        income=data.get("income") or 0,
-        expense=data.get("expense") or 0,
-        memo=data.get("memo"),
-        posting_date=datetime.strptime(data["posting_date"], "%Y-%m-%d").date(),
+        user_id=request.form.get("user_id"),
+        category_id=request.form.get("category_id"),
+        income=request.form.get("income"),
+        expense=request.form.get("expense"),
+        memo=request.form.get("memo"),
+        posting_date=posting_date,
         input_date=date.today()
     )
 
