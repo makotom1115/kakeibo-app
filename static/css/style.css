@@ -318,8 +318,12 @@ input[type="file"] {
 ================================== */
 
 .edit-form {
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
+    padding: 30px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background: #fafafa;
 }
 
 .form-row {
@@ -329,9 +333,9 @@ input[type="file"] {
 }
 
 .form-row label {
-    width: 80px;
-    font-weight: bold;
+    width: 100px;
     text-align: right;
+    font-weight: bold;
     margin-right: 15px;
 }
 
@@ -339,6 +343,7 @@ input[type="file"] {
 .form-row select {
     width: 200px;
     padding: 6px;
+    box-sizing: border-box;
 }
 
 .form-button {
