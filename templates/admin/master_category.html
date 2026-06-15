@@ -9,29 +9,35 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
-    <p>
-        費目名：
-        <input type="text" 
-               name="category_name" 
+<form method="POST" class="edit-form">
+
+    <div class="form-row">
+        <label>費目名</label>
+        <input type="text"
+               name="category_name"
                value="{{ category_name }}">
-    </p>
+    </div>
 
-    <p>
-        収支選択：
-    <select name="transaction_type">
-        <option value="expense">
-            支出
-        </option>
+    <div class="form-row">
+        <label>収支区分</label>
 
-        <option value="income">
-            収入
-        </option>
-    </select>
-    </p>
-    <button type="submit">
-        登録
-    </button>
+        <select name="transaction_type">
+            <option value="expense">
+                支出
+            </option>
+
+            <option value="income">
+                収入
+            </option>
+        </select>
+    </div>
+
+    <div class="form-button">
+        <button type="submit">
+            登録
+        </button>
+    </div>
+
 </form>
     <a href="{{ url_for('master_category_preview')}}">
         費目表示画面へ
