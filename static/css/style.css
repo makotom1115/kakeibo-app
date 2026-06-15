@@ -314,6 +314,39 @@ input[type="file"] {
 }
 
 /* ==================================
+   マスタ編集
+================================== */
+
+.edit-form {
+    width: 350px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.form-row label {
+    width: 80px;
+    font-weight: bold;
+    text-align: right;
+    margin-right: 15px;
+}
+
+.form-row input,
+.form-row select {
+    width: 200px;
+    padding: 6px;
+}
+
+.form-button {
+    text-align: center;
+    margin-top: 20px;
+}
+
+/* ==================================
    レスポンシブ
 ================================== */
 
