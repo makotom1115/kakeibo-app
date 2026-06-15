@@ -9,41 +9,40 @@
 {% endblock %}
 
 {% block content %}
-<form method="POST">
+<form method="POST" class="edit-form">
 
-    <div>
-        費目名
-        <input type="text" 
-               name="name" 
+    <div class="form-row">
+        <label>費目名</label>
+        <input type="text"
+               name="name"
                value="{{ category.name }}">
     </div>
 
-    <div>
-        種類
-        <select name="transaction_type">
+    <div class="form-row">
+        <label>種類</label>
 
+        <select name="transaction_type">
             <option value="income"
-            {% if category.transaction_type == 'income' %}
-            selected
-            {% endif %}
+                {% if category.transaction_type == 'income' %}
+                selected
+                {% endif %}
             >
-            収入
+                収入
             </option>
 
             <option value="expense"
-            {% if category.transaction_type == 'expense' %}
-            selected
-            {% endif %}
+                {% if category.transaction_type == 'expense' %}
+                selected
+                {% endif %}
             >
-            支出
+                支出
             </option>
-
         </select>
     </div>
 
-    <button type="submit">
-        更新
-    </button>
+    <div class="form-button">
+        <button type="submit">更新</button>
+    </div>
 
 </form>
 {% endblock %}
