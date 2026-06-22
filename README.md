@@ -36,8 +36,8 @@ Render（デプロイ）
 過去データをもとにした簡易的な収支予測機能の実装
 
 URL
-GitHub: （https://github.com/makotom1115/kakeibo-app）
-デモサイト: （https://kakeibo-app-31pu.onrender.com）
+GitHub: https://github.com/makotom1115/kakeibo-app
+デモサイト: https://kakeibo-app-31pu.onrender.com
 
 開発環境
 OS：Windows
